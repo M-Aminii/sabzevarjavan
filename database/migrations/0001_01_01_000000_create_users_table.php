@@ -13,21 +13,26 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 100)->nullable();
-            $table->string('last_name', 100)->nullable();
-            $table->string('mobile', 13)->unique()->nullable();
-            $table->string('email', 100)->unique()->nullable();
+            $table->string('first_name', 100);
+            $table->string('last_name', 100);
+            $table->string('mobile', 13)->unique();
             $table->string('national_code', 10)->unique();
-            $table->date('birth_date')->nullable();
-            $table->enum('gender', ['male', 'female', 'other'])->nullable();
-            $table->string('avatar', 100)->nullable();
+            $table->date('birth_date');
+            $table->enum('gender', ['male', 'female']);
+            $table->enum('marital_status', ['single', 'married']);
+            $table->text('address')->nullable();
+            $table->enum('employment_status', ['employed', 'unemployed', 'student', 'retired']);
+            $table->string('company_name', 150)->nullable();
+            $table->string('job_title', 150)->nullable();
             $table->timestamps();
         });
 
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+        Schema::create('otp_codes', function (Blueprint $table) {
+            $table->id();
+            $table->string('mobile', 13)->index();
+            $table->string('code', 6);
+            $table->timestamp('expires_at');
+            $table->timestamps();
         });
 
         Schema::create('sessions', function (Blueprint $table) {
@@ -46,7 +51,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('otp_codes');
         Schema::dropIfExists('sessions');
     }
 };

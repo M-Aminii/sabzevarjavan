@@ -1,0 +1,275 @@
+:root {
+    --bg: #e9eff2;
+    --card: #fff;
+    --accent: #2b78ff;
+    --muted: #6b7280;
+    --input-border: #e5e7eb;
+    --danger: #e53e3e;
+    font-family: Vazir, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 12px;
+    color: #111827;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* کارت مرکزی */
+.card {
+    width: 100%;
+    max-width: 680px;
+    background: var(--card);
+    border-radius: 10px;
+    padding: 34px;
+    box-shadow: 0 8px 20px rgba(16, 24, 40, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+/* عنوان */
+.title {
+    margin: 0;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--muted);
+    margin-top: 0;
+    margin-bottom: 22px;
+    font-size: 15px;
+}
+
+/* فرم */
+.form .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.form label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    text-align: right;
+}
+
+.required {
+    color: var(--danger);
+    margin-left: 6px;
+}
+
+/* input, textarea, select */
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"],
+.form textarea,
+.form select,
+.form input[type="tel"] {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 2px solid var(--input-border);
+    background: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: box-shadow .15s, border-color .15s;
+    direction: rtl;
+}
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+    box-shadow: 0 0 0 4px rgba(43, 120, 255, 0.12);
+    border-color: var(--accent);
+}
+
+.form textarea {
+    min-height: 88px;
+    resize: vertical;
+    padding-top: 12px;
+    direction: rtl;
+}
+
+/* کلاس‌های اندازه */
+.half-width {
+    width: 48%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.submit-btn {
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 6px;
+    box-shadow: 0 6px 18px rgba(43, 120, 255, 0.14);
+}
+
+.submit-btn:hover {
+    transform: translateY(-1px);
+}
+
+.small-note {
+    text-align: center;
+    color: var(--muted);
+    margin-top: 14px;
+}
+
+.small-note a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.error {
+    color: var(--danger);
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.hidden-block {
+    display: none;
+    margin-bottom: 10px;
+}
+
+@media (max-width:520px) {
+    .card {
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+
+    .form .row {
+        flex-direction: column;
+    }
+
+    .half-width {
+        width: 100%;
+    }
+}
+
+/* Alerts */
+.alert {
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.alert-success {
+    background-color: #e7f6ee;
+    border: 1px solid #2ecc71;
+    color: #187d46;
+    box-shadow: 0 4px 14px rgba(46, 204, 113, 0.12);
+}
+
+.alert-warning {
+    background-color: #e7f6ee;
+    border: 1px solid #c0c525;
+    color: #c0c525;
+    box-shadow: 0 4px 14px rgba(196, 204, 46, 0.12);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === هماهنگ‌سازی Choices.js با inputها === */
+.choices {
+    direction: rtl;
+    width: 100%;
+    text-align: right;
+    font-family: "Vazir", sans-serif;
+}
+
+.choices__inner {
+    display: flex;
+    align-items: center;
+    height: 42px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0 10px;
+    background-color: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.choices__inner:focus,
+.choices__inner.is-focused {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.choices__list--dropdown {
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.choices__list--dropdown .choices__item--selectable {
+    padding: 8px 10px;
+    font-size: 14px;
+}
+
+.choices__list--dropdown .choices__item--selectable.is-highlighted {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.choices[data-type*="select-one"]::after {
+    border: none;
+}
+
+.choices[data-type*="select-one"] .choices__inner::after {
+    content: "▾";
+    position: absolute;
+    left: 10px;
+    font-size: 14px;
+    color: #888;
+    pointer-events: none;
+}
+
+.row .choices {
+    margin-top: 5px;
+}
+
