@@ -21,7 +21,7 @@
 
   <div class="card">
     <h1 class="title">فرم ثبت نام</h1>
-    <p class="subtitle">ایجاد حساب جدید</p>
+    <p class="subtitle"></p>
 
     @if (session('success'))
         <div class="alert alert-success">
@@ -68,12 +68,16 @@
   </div>
 
   <div class="row">
-    <div class="half-width">
-      <label for="birth_date_shamsi">تاریخ تولد <span class="required">*</span></label>
-      <input type="text" id="birth_date_shamsi" placeholder="مثلاً 1379/05/23" value="{{ old('birth_date') }}">
-      <input type="hidden" id="birth_date" name="birth_date" value="{{ old('birth_date') }}">
-      @error('birth_date') <div class="error">{{ $message }}</div> @enderror
+   <div class="half-width">
+    <label for="birth_date_shamsi">تاریخ تولد <span class="required">*</span></label>
+    <div class="date-input-wrapper">
+        <input type="text" id="birth_date_shamsi" placeholder="مثلاً 1379/05/23" value="{{ old('birth_date') }}">
+        <span class="calendar-icon" id="calendarTrigger">&#128197;</span>
     </div>
+    <input type="hidden" id="birth_date" name="birth_date" value="{{ old('birth_date') }}">
+    @error('birth_date') <div class="error">{{ $message }}</div> @enderror
+    </div>
+
 
     <div class="half-width">
       <label for="gender">جنسیت <span class="required">*</span></label>
@@ -129,6 +133,7 @@
     <div class="full-width">
       <label for="address">نشانی <span class="required">*</span></label>
       <textarea name="address" id="address">{{ old('address') }}</textarea>
+        @error('address') <div class="error">{{ $message }}</div> @enderror
     </div>
   </div>
 

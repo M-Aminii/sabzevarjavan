@@ -1,59 +1,55 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const alertBox = document.querySelector('.alert-success');
-    if (alertBox) {
-        alertBox.style.opacity = '0';
-        setTimeout(() => {
-            alertBox.style.transition = 'opacity 0.6s ease';
-            alertBox.style.opacity = '1';
-        }, 150);
-    }
+    // ✅ نمایش انیمیشنی هشدارها
+    ['alert-success', 'alert-warning'].forEach(cls => {
+        const el = document.querySelector('.' + cls);
+        if (el) {
+            el.style.opacity = '0';
+            setTimeout(() => {
+                el.style.transition = 'opacity 0.6s ease';
+                el.style.opacity = '1';
+            }, 150);
+        }
+    });
 
-    const warningBox = document.querySelector('.alert-warning');
-    if (warningBox) {
-        warningBox.style.opacity = '0';
-        setTimeout(() => {
-            warningBox.style.transition = 'opacity 0.6s ease';
-            warningBox.style.opacity = '1';
-        }, 150);
-    }
-
+    // ✅ کنترل وضعیت اشتغال
     const employment = document.getElementById('employment_status');
     const jobFields = document.getElementById('jobFields');
     function toggleJobFields() {
         if (!employment) return;
-        if (employment.value === 'employed') {
-            jobFields.style.display = 'block';
-        } else {
-            jobFields.style.display = 'none';
-        }
+        jobFields.style.display = employment.value === 'employed' ? 'flex' : 'none';
     }
     if (employment) {
         employment.addEventListener('change', toggleJobFields);
         toggleJobFields();
     }
 
-    $('#birth_date_shamsi').persianDatepicker({
-        format: 'YYYY/MM/DD',
-        altField: '#birth_date',
-        altFormat: 'YYYY/MM/DD',
-        observer: true,
-        initialValue: false,
-        autoClose: true,
-        timePicker: { enabled: false },
-        toolbox: { calendarSwitch: { enabled: false } },
-        calendar: {
-            persian: {
-                locale: 'en',
-                leapYearMode: 'astronomical'
+    if (window.$ && $('#calendarTrigger').length) {
+        $('#calendarTrigger').persianDatepicker({
+            format: 'YYYY/MM/DD',
+            altField: '#birth_date',
+            altFormat: 'YYYY/MM/DD',
+            observer: true,
+            initialValue: false,
+            responsive: true,
+            autoClose: true,
+            timePicker: { enabled: false },
+            toolbox: { calendarSwitch: { enabled: false } },
+            calendar: {
+                persian: {
+                    locale: 'fa',
+                    leapYearMode: 'astronomical'
+                }
+            },
+            persianDigit: false,
+            keyboardNavigation: true,
+            responsive: true,
+            onSelect: function (unixDate) {
+                const date = new persianDate(unixDate).format('YYYY/MM/DD');
+                $('#birth_date').val(date);
+                $('#birth_date_shamsi').val(date);
             }
-        },
-        persianDigit: false,
-        keyboardNavigation: true,
-        onSelect: function (unixDate) {
-            const date = new persianDate(unixDate).format('YYYY/MM/DD');
-            $('#birth_date').val(date);
-        }
-    });
+        });
+    }
 
     $('#birth_date_shamsi').on('input', function () {
         let value = $(this).val().replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
@@ -62,6 +58,5 @@ document.addEventListener('DOMContentLoaded', function () {
             $('#birth_date').val(value);
         }
     });
-
 
 });

@@ -273,3 +273,39 @@ body {
     margin-top: 5px;
 }
 
+.date-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.date-input-wrapper input {
+    width: 100%;
+    padding: 14px 40px 14px 16px;
+    /* فضای سمت چپ برای آیکون */
+    border-radius: 10px;
+    border: 2px solid var(--input-border);
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.date-input-wrapper input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(43, 120, 255, 0.12);
+}
+
+.calendar-icon {
+    position: absolute;
+    left: 12px;
+    /* داخل input */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--accent);
+    cursor: pointer;
+}
+
+.calendar-icon:hover {
+    color: #1a5fe0;
+}
+

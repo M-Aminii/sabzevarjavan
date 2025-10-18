@@ -24,9 +24,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         try {
-            $birthDateMiladi = Jalalian::fromFormat('Y/m/d', $request->birth_date)
-                ->toCarbon()
-                ->toDateString();
+            $birthDateMiladi = convertJalaliToGregorian($request->birth_date);
 
             $birth = Carbon::parse($birthDateMiladi);
             $age = $birth->age;
@@ -65,7 +63,6 @@ class AuthController extends Controller
 
         return redirect()->back()->with('success', '✅ ثبت‌ نام با موفقیت انجام شد.');
     }
-
 
     public function sendOtp(Request $request)
     {
